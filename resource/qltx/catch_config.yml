@@ -18,10 +18,14 @@ header:
     TK: 4b2f6bb5c01499a1b990ded72f2b46cb  #关键
     User-Agent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1907300 MicroMessenger/7.0.4 Language/zh_CN webview/'
 
-ipproxy:
-
 timedelay:
 
 dbconfig:
+
+catchconfig:
+    ipproxy:
+    start: 1
+    end: 100
+
 
 
