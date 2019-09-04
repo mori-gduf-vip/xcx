@@ -1,22 +1,9 @@
 header:
     Accept: 'application/json'
-    Accept-Encoding: 'gzip, deflate, br'
-    Accept-Language: 'zh-CN,zh;q=0.9'
-    Cache-Control: 'no-cache'
-    Connection: 'keep-alive'
-    Content-Length: '44'
+
     content-type: 'application/x-www-form-urlencoded'
-    Host: 'ntx.qqtn.com'
-    Origin: 'http://127.0.0.1:19335'
-    Pragma: 'no-cache'
-    Referer: 'https://servicewechat.com/wx581d41eca01df036/devtools/page-frame.html'
-    sec-ch-ua: 'nwjs 74'
-    Sec-Fetch-Dest: 'empty'
-    Sec-Fetch-Mode: 'cors'
-    Sec-Fetch-Site: 'cross-site'
-    Sec-Fetch-User: '?F'
+    User-Agent: "Mozilla/5.0 (Linux; U; Android 2.3.6; zh-cn; GT-S5660 Build/GINGERBREAD) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1 MicroMessenger/4.5.255"
     TK: '0eaf122095aa245fed0c09f15724913b'  #关键
-#    User-Agent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1907300 MicroMessenger/7.0.4 Language/zh_CN webview/'
     Proxy-Authorization: ''
 timedelay:
 
@@ -24,7 +11,7 @@ dbconfig:
 
 catchconfig:
     ipproxy:
-        url: '42.242.162.231:766'
+        url: 'proxy.wandouip.com:8090'
         username: 'hy18022317541@163.com'
         pwd: 'hY18826079509'
     start: 1

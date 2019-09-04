@@ -1,0 +1,11 @@
+
+catchconfig:
+    ipproxy:
+        url: 'proxy.wandouip.com:8090'
+        username: 'hy18022317541@163.com'
+        pwd: 'hY18826079509'
+    start: 1
+    end: 100
+
+
+
