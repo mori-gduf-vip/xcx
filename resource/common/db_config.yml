@@ -1,0 +1,10 @@
+
+dbconfig:
+  host: 'localhost'
+  user: 'root'
+  password: '124314'
+  db: 'qqxcx'
+  charset: 'utf8mb4'
+
+
+

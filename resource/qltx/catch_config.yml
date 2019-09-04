@@ -7,8 +7,6 @@ header:
     Proxy-Authorization: ''
 timedelay:
 
-dbconfig:
-
 catchconfig:
     ipproxy:
         url: 'proxy.wandouip.com:8090'
