@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import hashlib
 import json
+import os
+import urllib
 
 import certifi
 import urllib3
@@ -118,16 +120,43 @@ def catch():
 
 
 def upload_from_db():
-    cursor = connection.cursor();
-    resultlist = []
+    # 查询数据库
     sql = "select * from qltx where copy_done = 0"
-
-
+    cursor = connection.cursor();
+    cursor.execute(sql)
+    resultlist= cursor.fetchall()
+    i=0
+    # 遍历操作 更新路径和操作标示
+    for r in resultlist:
+        download_and_update(r,cursor)
+        i=i+1
+        print i
     logutil.print_msg("处理", "处理七牛云")
 
+def download_and_update(po,cursor):
+    url = po['imgurl']
+    suffix_url=url.replace('https://','/')
+    img_path=confighelper.get_img_path();
+    img_path= img_path+suffix_url
+    img_prefix = img_path[0:img_path.rindex("/")]
+    if os.path.exists(img_path):
+        print("File have already exist. skip")
+    else:
+        try:
+            if not os.path.exists(img_prefix):
+                os.makedirs(img_prefix)
+            print img_path
+            print url
+            urllib.urlretrieve(url, img_path)
+            print po['is_keep']
+            print po['attr1']
+        except Exception as e:
+            print("Error occurred when downloading file, error message:")
+            print e
 
 
 def main():
+
     upload_from_db()
 
 
