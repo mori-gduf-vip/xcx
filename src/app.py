@@ -3,16 +3,25 @@ import hashlib
 import json
 import os
 import urllib
-
 import certifi
 import urllib3
 import urllib3.contrib.pyopenssl
-
+from qiniu import Auth
+from qiniu import BucketManager
 from util import confighelper, logutil, dbutil, codeutil
 
 # db模块抽出来 代码整洁
 connection = dbutil.get_connection();
 request = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
+
+# 七牛云模块
+# 需要填写你的 Access Key 和 Secret Key
+access_key = '_KrWKd4NSoWzCY5IjcVJ68XdIytPXuSe5xGO-Fqg'
+secret_key = '_kTYdEpGp5N5IjdEiOOFv7NgZHHwxzqQxHY6ee67'
+# 构建鉴权对象
+q = Auth(access_key, secret_key)
+bucket = BucketManager(q)
+bucket_name='qltxxcx'
 
 class WxCatch:
     url_request = ""
@@ -124,21 +133,28 @@ def upload_from_db():
     sql = "select * from qltx where copy_done = 0"
     cursor = connection.cursor();
     cursor.execute(sql)
-    resultlist= cursor.fetchall()
-    i=0
+    resultlist = cursor.fetchall()
+    i = 0
     # 遍历操作 更新路径和操作标示
     for r in resultlist:
-        download_and_update(r,cursor)
-        i=i+1
+        download_and_update(r, cursor)
+        i = i + 1
         print i
     logutil.print_msg("处理", "处理七牛云")
 
-def download_and_update(po,cursor):
+
+def download_and_update(po, cursor):
     url = po['imgurl']
-    suffix_url=url.replace('https://','/')
-    img_path=confighelper.get_img_path();
-    img_path= img_path+suffix_url
+    suffix_url = url.replace('https://', '/')
+    img_path = confighelper.get_img_path();
+    img_path = img_path + suffix_url
     img_prefix = img_path[0:img_path.rindex("/")]
+    print suffix_url
+    print url
+    key = suffix_url
+    ret, info = bucket.fetch(url, bucket_name, key)
+    print(info)
+    assert ret['key'] == key
     if os.path.exists(img_path):
         print("File have already exist. skip")
     else:
@@ -156,9 +172,7 @@ def download_and_update(po,cursor):
 
 
 def main():
-
     upload_from_db()
-
 
 if __name__ == "__main__":
     main()
